@@ -1,0 +1,15 @@
+		(1)	(2)	(3)	(4)	(5)	(6)	(7)
+VARIABLES	LABELS	wheat_aid	wheat_aid	wheat_aid	wheat_aid	wheat_aid	wheat_aid	wheat_aid
+								
+l_any_war		-6.39846	-6.65171	-5.02937	-5.65814	-9.21818		
+		(18.08911)	(17.56824)	(15.93568)	(15.62230)	(18.06950)		
+instrument	Baseline interaction instrument: US wheat prod (t-1) x avg food aid prob (1971-2	0.00233	0.00347	0.00346	0.00332	0.00362	0.00349	0.00357
+		(0.00103)	(0.00136)	(0.00127)	(0.00098)	(0.00111)	(0.00099)	(0.00109)
+l_inter_state							-50.05621	
+							(32.24350)	
+l_intra_state								-2.55461
+								(16.91630)
+								
+Observations		4,071	4,071	4,071	4,071	4,071	4,071	4,071
+R-squared		0.50856	0.51686	0.52468	0.53791	0.54401	0.54651	0.54356
+Robust standard errors in parentheses								

@@ -1,0 +1,634 @@
+------------------------------------------------------------------------------
+      name:  <unnamed>
+       log:  \\Client\H$\Downloads\112825-V1\Replication-Files\FoodAidReg.log
+  log type:  text
+ opened on:  18 Jan 2022, 11:37:47
+
+. 
+. ************************************
+. *** Some basic coding & cleaning ***
+. ************************************
+. use "FAid_Final.dta", clear
+
+. tsset obs year
+       panel variable:  obs (strongly balanced)
+        time variable:  year, 1950 to 2006
+                delta:  1 unit
+
+. 
+. /* Converting wheat aid measure & production to thousands of tonnes - coeffi
+> cients are easier to read */
+. *replace wheat_aid=wheat_aid_USA/1000
+. replace wheat_aid=wheat_aid/1000
+variable wheat_aid was long now double
+(1,554 real changes made)
+
+. replace US_wheat_production=US_wheat_production/1000
+(7,239 real changes made)
+
+. replace recipient_wheat_prod=recipient_wheat_prod/1000
+variable recipient_wheat_prod was long now double
+(2,889 real changes made)
+
+. replace recipient_cereals_prod=recipient_cereals_prod/1000
+(4,685 real changes made)
+
+. replace real_usmilaid=real_usmilaid/1000
+(3,215 real changes made)
+
+. replace real_us_nonfoodaid_ecaid=real_us_nonfoodaid_ecaid/1000
+(4,657 real changes made)
+
+. replace non_us_oda_net=non_us_oda_net/1000
+(5,069 real changes made)
+
+. replace non_us_oda_net2=non_us_oda_net2/1000
+(5,079 real changes made)
+
+. 
+. replace world_wheat_aid=world_wheat_aid/1000
+(2,288 real changes made)
+
+. replace world_cereals_aid=world_cereals_aid/1000
+(2,945 real changes made)
+
+. replace non_US_wheat_aid=non_US_wheat_aid/1000
+(1,714 real changes made)
+
+. replace non_US_cereals_aid=non_US_cereals_aid/1000
+(2,410 real changes made)
+
+. 
+. * LDVs
+. gen l_any_war=l.any_war
+(1,703 missing values generated)
+
+. gen l_inter_state=l.inter_state
+(1,703 missing values generated)
+
+. gen l_intra_state=l.intra_state
+(1,703 missing values generated)
+
+. gen l_US_wheat_production=l.US_wheat_production
+(127 missing values generated)
+
+. 
+. * Lag and lead of wheat aid
+. gen l_wheat_aid=l.wheat_aid
+(3,067 missing values generated)
+
+. gen l2_wheat_aid=l2.wheat_aid
+(3,194 missing values generated)
+
+. gen l3_wheat_aid=l3.wheat_aid
+(3,321 missing values generated)
+
+. gen l4_wheat_aid=l4.wheat_aid
+(3,448 missing values generated)
+
+. gen l5_wheat_aid=l5.wheat_aid
+(3,575 missing values generated)
+
+. 
+. gen f_wheat_aid=f.wheat_aid
+(2,940 missing values generated)
+
+. gen f2_wheat_aid=f2.wheat_aid
+(2,940 missing values generated)
+
+. gen f3_wheat_aid=f3.wheat_aid
+(2,940 missing values generated)
+
+. gen f4_wheat_aid=f4.wheat_aid
+(2,940 missing values generated)
+
+. gen f5_wheat_aid=f5.wheat_aid
+(2,940 missing values generated)
+
+. 
+. foreach x of varlist all_Precip_jan-all_Precip_dec all_Temp_jan-all_Temp_dec
+> {
+  2.         drop `x'_faavg
+  3.         gen `x'_faavg=`x'*fadum_avg
+  4. }
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+(1,270 missing values generated)
+
+. 
+. 
+. /* Creating all instruments */
+. gen instrument=l.US_wheat_production*fadum_avg
+(127 missing values generated)
+
+. la var instrument "Baseline interaction instrument: US wheat prod (t-1) x av
+> g food aid prob (1971-2006)"
+note: label truncated to 80 characters
+
+. 
+. gen instrument2=l.US_wheat_production
+(127 missing values generated)
+
+. la var instrument2 "Alternative unteracted instrument: US wheat production (
+> t-1)"
+
+. 
+. gen l_instrument=l2.US_wheat_production*fadum_avg
+(254 missing values generated)
+
+. la var l_instrument "One-year lag of baseline interaction instrument"
+
+. gen l2_instrument=l3.US_wheat_production*fadum_avg
+(381 missing values generated)
+
+. la var l2_instrument "Two-year lag of baseline interaction instrument"
+
+. gen l3_instrument=l4.US_wheat_production*fadum_avg
+(508 missing values generated)
+
+. la var l3_instrument "Three-year lag of baseline interaction instrument"
+
+. gen l4_instrument=l5.US_wheat_production*fadum_avg
+(635 missing values generated)
+
+. la var l4_instrument "Four-year lag of baseline interaction instrument"
+
+. gen l5_instrument=l6.US_wheat_production*fadum_avg
+(762 missing values generated)
+
+. la var l5_instrument "Five-year lag of baseline interaction instrument"
+
+. 
+. gen f_instrument=US_wheat_production*fadum_avg
+
+. la var f_instrument "One-year forward of baseline interaction instrument"
+
+. gen f2_instrument=f.US_wheat_production*fadum_avg
+(127 missing values generated)
+
+. la var f2_instrument "Two-year forward of baseline interaction instrument"
+
+. gen f3_instrument=f2.US_wheat_production*fadum_avg
+(254 missing values generated)
+
+. la var f3_instrument "Two-year forward of baseline interaction instrument"
+
+. gen f4_instrument=f3.US_wheat_production*fadum_avg
+(381 missing values generated)
+
+. la var f4_instrument "Two-year forward of baseline interaction instrument"
+
+. gen f5_instrument=f4.US_wheat_production*fadum_avg
+(508 missing values generated)
+
+. la var f5_instrument "Two-year forward of baseline interaction instrument"
+
+. 
+. gen instrument3=ln(l.US_wheat_production)*fadum_avg
+(127 missing values generated)
+
+. la var instrument3 "Instrument using the log of lagged US wheat production"
+
+. 
+. /* Creating lagged US production variables */
+. foreach x in Oranges Grapes Lettuce Cotton_lint Onions_dry Grapefruit Cabbag
+> es Watermelons Carrots_turnips Peaches_nectarines{
+  2.         gen l_USprod_`x'=l.USprod_`x'
+  3.         la var l_USprod_`x' "US production in year t-1 (tonnes, MT) - fro
+> m FAOStat"
+  4. }
+(1,524 missing values generated)
+(1,524 missing values generated)
+(1,524 missing values generated)
+(1,524 missing values generated)
+(1,524 missing values generated)
+(1,524 missing values generated)
+(1,524 missing values generated)
+(1,524 missing values generated)
+(1,524 missing values generated)
+(1,524 missing values generated)
+
+. 
+. /* Dropping years outside of the sample period */
+. drop if year<1971
+(2,667 observations deleted)
+
+. drop if year>2006
+(0 observations deleted)
+
+. 
+. /* Generating continent indicators, year indicators, and their interactions 
+> so that we don't have to use time-series operators -- they take longer for s
+> tata to compute */
+. gen cont=.
+(4,572 missing values generated)
+
+. replace cont=1 if wb_region=="East Asia & Pacific"
+(504 real changes made)
+
+. replace cont=2 if wb_region=="Europe & Central Asia"
+(684 real changes made)
+
+. replace cont=3 if wb_region=="Latin America & Caribbean"
+(900 real changes made)
+
+. replace cont=4 if wb_region=="Middle East & North Africa"
+(612 real changes made)
+
+. replace cont=5 if wb_region=="South Asia"
+(252 real changes made)
+
+. replace cont=6 if wb_region=="Sub-Saharan Africa"
+(1,620 real changes made)
+
+. 
+. tab cont, gen(contdum)
+
+       cont |      Freq.     Percent        Cum.
+------------+-----------------------------------
+          1 |        504       11.02       11.02
+          2 |        684       14.96       25.98
+          3 |        900       19.69       45.67
+          4 |        612       13.39       59.06
+          5 |        252        5.51       64.57
+          6 |      1,620       35.43      100.00
+------------+-----------------------------------
+      Total |      4,572      100.00
+
+. tab year, gen(ydum)
+
+       Year |      Freq.     Percent        Cum.
+------------+-----------------------------------
+       1971 |        127        2.78        2.78
+       1972 |        127        2.78        5.56
+       1973 |        127        2.78        8.33
+       1974 |        127        2.78       11.11
+       1975 |        127        2.78       13.89
+       1976 |        127        2.78       16.67
+       1977 |        127        2.78       19.44
+       1978 |        127        2.78       22.22
+       1979 |        127        2.78       25.00
+       1980 |        127        2.78       27.78
+       1981 |        127        2.78       30.56
+       1982 |        127        2.78       33.33
+       1983 |        127        2.78       36.11
+       1984 |        127        2.78       38.89
+       1985 |        127        2.78       41.67
+       1986 |        127        2.78       44.44
+       1987 |        127        2.78       47.22
+       1988 |        127        2.78       50.00
+       1989 |        127        2.78       52.78
+       1990 |        127        2.78       55.56
+       1991 |        127        2.78       58.33
+       1992 |        127        2.78       61.11
+       1993 |        127        2.78       63.89
+       1994 |        127        2.78       66.67
+       1995 |        127        2.78       69.44
+       1996 |        127        2.78       72.22
+       1997 |        127        2.78       75.00
+       1998 |        127        2.78       77.78
+       1999 |        127        2.78       80.56
+       2000 |        127        2.78       83.33
+       2001 |        127        2.78       86.11
+       2002 |        127        2.78       88.89
+       2003 |        127        2.78       91.67
+       2004 |        127        2.78       94.44
+       2005 |        127        2.78       97.22
+       2006 |        127        2.78      100.00
+------------+-----------------------------------
+      Total |      4,572      100.00
+
+. tab risocode, gen(cdum)
+
+        Aid |
+  recipient |
+    isocode |      Freq.     Percent        Cum.
+------------+-----------------------------------
+        AFG |         36        0.79        0.79
+        AGO |         36        0.79        1.57
+        ALB |         36        0.79        2.36
+        ARE |         36        0.79        3.15
+        ARG |         36        0.79        3.94
+        ARM |         36        0.79        4.72
+        AZE |         36        0.79        5.51
+        BDI |         36        0.79        6.30
+        BEN |         36        0.79        7.09
+        BFA |         36        0.79        7.87
+        BGD |         36        0.79        8.66
+        BGR |         36        0.79        9.45
+        BHS |         36        0.79       10.24
+        BLR |         36        0.79       11.02
+        BLZ |         36        0.79       11.81
+        BOL |         36        0.79       12.60
+        BRA |         36        0.79       13.39
+        BRN |         36        0.79       14.17
+        BTN |         36        0.79       14.96
+        BWA |         36        0.79       15.75
+        CAF |         36        0.79       16.54
+        CHL |         36        0.79       17.32
+        CHN |         36        0.79       18.11
+        CIV |         36        0.79       18.90
+        CMR |         36        0.79       19.69
+        COD |         36        0.79       20.47
+        COG |         36        0.79       21.26
+        COL |         36        0.79       22.05
+        COM |         36        0.79       22.83
+        CPV |         36        0.79       23.62
+        CRI |         36        0.79       24.41
+        CUB |         36        0.79       25.20
+        CYP |         36        0.79       25.98
+        DJI |         36        0.79       26.77
+        DOM |         36        0.79       27.56
+        DZA |         36        0.79       28.35
+        ECU |         36        0.79       29.13
+        EGY |         36        0.79       29.92
+        ERI |         36        0.79       30.71
+        ETH |         36        0.79       31.50
+        FJI |         36        0.79       32.28
+        GAB |         36        0.79       33.07
+        GEO |         36        0.79       33.86
+        GHA |         36        0.79       34.65
+        GIN |         36        0.79       35.43
+        GMB |         36        0.79       36.22
+        GNB |         36        0.79       37.01
+        GNQ |         36        0.79       37.80
+        GTM |         36        0.79       38.58
+        GUY |         36        0.79       39.37
+        HND |         36        0.79       40.16
+        HTI |         36        0.79       40.94
+        IDN |         36        0.79       41.73
+        IND |         36        0.79       42.52
+        IRN |         36        0.79       43.31
+        IRQ |         36        0.79       44.09
+        JAM |         36        0.79       44.88
+        JOR |         36        0.79       45.67
+        KAZ |         36        0.79       46.46
+        KEN |         36        0.79       47.24
+        KGZ |         36        0.79       48.03
+        KHM |         36        0.79       48.82
+        KWT |         36        0.79       49.61
+        LAO |         36        0.79       50.39
+        LBN |         36        0.79       51.18
+        LBR |         36        0.79       51.97
+        LBY |         36        0.79       52.76
+        LKA |         36        0.79       53.54
+        LSO |         36        0.79       54.33
+        LTU |         36        0.79       55.12
+        LVA |         36        0.79       55.91
+        MAR |         36        0.79       56.69
+        MDA |         36        0.79       57.48
+        MDG |         36        0.79       58.27
+        MEX |         36        0.79       59.06
+        MLI |         36        0.79       59.84
+        MNG |         36        0.79       60.63
+        MOZ |         36        0.79       61.42
+        MRT |         36        0.79       62.20
+        MUS |         36        0.79       62.99
+        MWI |         36        0.79       63.78
+        MYS |         36        0.79       64.57
+        NAM |         36        0.79       65.35
+        NER |         36        0.79       66.14
+        NGA |         36        0.79       66.93
+        NIC |         36        0.79       67.72
+        NPL |         36        0.79       68.50
+        OMN |         36        0.79       69.29
+        PAK |         36        0.79       70.08
+        PAN |         36        0.79       70.87
+        PER |         36        0.79       71.65
+        PHL |         36        0.79       72.44
+        PNG |         36        0.79       73.23
+        PRY |         36        0.79       74.02
+        QAT |         36        0.79       74.80
+        ROU |         36        0.79       75.59
+        RUS |         36        0.79       76.38
+        RWA |         36        0.79       77.17
+        SAU |         36        0.79       77.95
+        SDN |         36        0.79       78.74
+        SEN |         36        0.79       79.53
+        SLB |         36        0.79       80.31
+        SLE |         36        0.79       81.10
+        SLV |         36        0.79       81.89
+        SOM |         36        0.79       82.68
+        SUR |         36        0.79       83.46
+        SWZ |         36        0.79       84.25
+        SYR |         36        0.79       85.04
+        TCD |         36        0.79       85.83
+        TGO |         36        0.79       86.61
+        THA |         36        0.79       87.40
+        TJK |         36        0.79       88.19
+        TKM |         36        0.79       88.98
+        TLS |         36        0.79       89.76
+        TTO |         36        0.79       90.55
+        TUN |         36        0.79       91.34
+        TUR |         36        0.79       92.13
+        TWN |         36        0.79       92.91
+        TZA |         36        0.79       93.70
+        UGA |         36        0.79       94.49
+        UKR |         36        0.79       95.28
+        URY |         36        0.79       96.06
+        UZB |         36        0.79       96.85
+        VEN |         36        0.79       97.64
+        ZAF |         36        0.79       98.43
+        ZMB |         36        0.79       99.21
+        ZWE |         36        0.79      100.00
+------------+-----------------------------------
+      Total |      4,572      100.00
+
+. 
+. forval x=1/36{
+  2.         gen cont1_y`x'=contdum1*ydum`x'
+  3. }
+
+. forval x=1/36{
+  2.         gen cont2_y`x'=contdum2*ydum`x'
+  3. }
+
+. forval x=1/36{
+  2.         gen cont3_y`x'=contdum3*ydum`x'
+  3. }
+
+. forval x=1/36{
+  2.         gen cont4_y`x'=contdum4*ydum`x'
+  3. }
+
+. forval x=1/36{
+  2.         gen cont5_y`x'=contdum5*ydum`x'
+  3. }
+
+. forval x=1/36{
+  2.         gen cont6_y`x'=contdum6*ydum`x'
+  3. }
+
+. forval x=1/36{
+  2.         gen rcereal_y`x'=recipient_pc_cereals_prod_avg*ydum`x'
+  3. }
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+(72 missing values generated)
+
+. forval x=1/36{
+  2.         gen rimport_y`x'=cereal_pc_import_quantity_avg*ydum`x'
+  3. }
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+(36 missing values generated)
+
+. forval x=1/36{
+  2.         gen usec_y`x'=real_us_nonfoodaid_ecaid_avg*ydum`x'
+  3. }
+
+. forval x=1/36{
+  2.         gen usmil_y`x'=real_usmilaid_avg*ydum`x'
+  3. }
+
+. 
+. gen USA_ln_income = ln(USA_rgdpch)
+
+. 
+. bysort risocode: egen ln_rgdpch_avg=mean(ln_rgdpch) if year>=1971 & year<=20
+> 06
+
+. 
+. forval x=1/36{
+  2.         gen gdp_y`x'=ln_rgdpch_avg*ydum`x'
+  3. }
+
+. gen oil_fadum_avg=oil_price_2011_USD*fadum_avg
+
+. gen US_income_fadum_avg=USA_ln_income*fadum_avg
+
+. gen US_democ_pres_fadum_avg=US_president_democ*fadum_avg
+
+. 
+. local US_controls "oil_fadum_avg US_income_fadum_avg US_democ_pres_fadum_avg
+> "
+
+. local weather_controls "all_Precip_jan-all_Precip_dec all_Temp_jan-all_Temp_
+> dec all_Precip_jan_faavg-all_Precip_dec_faavg all_Temp_jan_faavg-all_Temp_de
+> c_faavg"
+
+. local country_chars_controls "gdp_y2-gdp_y36 usmil_y2-usmil_y36 usec_y2-usec
+> _y36"
+
+. local cereals_controls "rcereal_y2-rcereal_y36 rimport_y2-rimport_y36"
+
+. local baseline_controls "oil_fadum_avg US_income_fadum_avg US_democ_pres_fad
+> um_avg gdp_y2-gdp_y36 usmil_y2-usmil_y36 usec_y2-usec_y36 rcereal_y2-rcereal
+> _y36 rimport_y2-rimport_y36 all_Precip_jan-all_Precip_dec all_Temp_jan-all_T
+> emp_dec all_Precip_jan_faavg-all_Precip_dec_faavg all_Temp_jan_faavg-all_Tem
+> p_dec_faavg"
+
+. 
+. sor risocode year
+
+. save "in_sample.dta", replace
+file in_sample.dta saved
+
+. 
+. 
+. ***********************************
+. *** TABLE 1: Summary Statistics ***
+. ***********************************
+. 
+. use "in_sample.dta", clear
+
+. 
+. /* Generating in-sample indicator so that all specifications have the same n
+> umber of observations */
+. qui: xi: ivreg2 intra_state (wheat_aid=instrument) `baseline_controls' i.ris
+> ocode i.year*i.wb_region if year>=1971 & year<=2006, cluster(risocode)
+command ivreg2 is unrecognized
+r(199);
+
+end of do-file
+
+r(199);
+
+. exit, clear

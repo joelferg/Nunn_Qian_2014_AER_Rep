@@ -1,0 +1,10 @@
+		(1)	(2)	(3)	(4)	(5)	(6)	(7)
+VARIABLES	LABELS	any_war	any_war	any_war	any_war	any_war	intra_state	inter_state
+								
+wheat_aid	U.S. wheat aid (tonnes) - from FAO	0.00364	0.00303	0.00312	0.00343	0.00299	0.00254	-0.00044
+		(0.00174)	(0.00125)	(0.00117)	(0.00106)	(0.00096)	(0.00088)	(0.00033)
+								
+Observations		4,089	4,089	4,089	4,089	4,089	4,089	4,089
+R-squared		-0.03375	0.13439	0.13339	0.07659	0.19702	0.23568	0.35845
+KP F-Stat		5.840	7.371	8.237	12.76	12.10	12.10	12.10
+Robust standard errors in parentheses								

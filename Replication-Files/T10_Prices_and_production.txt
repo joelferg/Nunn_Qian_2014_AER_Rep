@@ -1,0 +1,10 @@
+		(1)	(2)	(3)	(4)
+VARIABLES	LABELS	wheat production	cereal production	wheat price	ln wheat price
+					
+wheat_aid	U.S. wheat aid (tonnes) - from FAO	-7.20592	-7.17655	-0.32872	-0.00094
+		(5.73546)	(9.72083)	(0.44611)	(0.00386)
+					
+Observations		2,368	3,736	1,737	1,737
+R-squared		0.94821	0.96171	0.82978	0.80857
+KP F-Stat		8.985	13.23	7.142	7.142
+Robust standard errors in parentheses					

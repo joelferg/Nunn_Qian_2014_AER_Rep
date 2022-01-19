@@ -1,0 +1,21 @@
+	(1)	(2)	(3)	(4)	(5)	(6)
+VARIABLES	intra_state	intra_state	intra_state	intra_state	intra_state	intra_state
+						
+wheat_aid	0.00254	0.00186	0.00292	0.00248	0.00353	0.00266
+	(0.00088)	(0.00099)	(0.00089)	(0.00120)	(0.00132)	(0.00122)
+wheat_aid_x_LowCereals		0.00231				
+		(0.00264)				
+wheat_aid_x_Below_mean_prod			-0.00093			
+			(0.00082)			
+wheat_aid_x_Road				-0.00126		
+				(0.00278)		
+wheat_aid_x_CW					-0.00172	
+					(0.00120)	
+wheat_aid_x_Align						-0.00117
+						(0.00288)
+						
+Observations	4,089	4,089	3,639	4,084	4,089	4,084
+R-squared	0.23568	0.29537	0.30221	0.25607	0.30839	0.21540
+Joint_coeff		0.00418	0.00199	0.00121	0.00182	0.00149
+Joint_se		0.00229	0.000939	0.00198	0.000717	0.00209
+Robust standard errors in parentheses						

@@ -1,0 +1,13 @@
+	(1)	(2)	(3)	(4)	(5)
+VARIABLES	intra_state	20yr conflict	15yr conflict	10yr conflict	5yr conflict
+					
+wheat_aid	0.00252	0.00320	0.00376	0.00381	0.00446
+	(0.00089)	(0.00128)	(0.00132)	(0.00149)	(0.00262)
+wheat_aid_x_Pastconflict		-0.00579	-0.00782	-0.00735	-0.00607
+		(0.00353)	(0.00517)	(0.00462)	(0.00369)
+					
+Observations	4,071	4,071	4,071	4,071	4,071
+R-squared	0.23812	0.23643	-0.09598	0.01765	0.28705
+Joint_coeff		-0.00259	-0.00406	-0.00355	-0.00160
+Joint_se		0.00300	0.00468	0.00388	0.00166
+Robust standard errors in parentheses					

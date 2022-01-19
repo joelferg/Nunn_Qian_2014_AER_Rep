@@ -1,0 +1,9 @@
+		(1)	(2)	(3)	(4)	(5)	(6)	(7)
+VARIABLES	LABELS	any_war	any_war	any_war	any_war	any_war	intra_state	inter_state
+								
+instrument	Baseline interaction instrument: US wheat prod (t-1) x avg food aid prob (1971-2	0.00829	0.01039	0.01070	0.01133	0.01071	0.00909	-0.00158
+		(0.00257)	(0.00263)	(0.00262)	(0.00318)	(0.00320)	(0.00322)	(0.00121)
+								
+Observations		4,089	4,089	4,089	4,089	4,089	4,089	4,089
+R-squared		0.51091	0.51197	0.52115	0.53645	0.55126	0.52549	0.38218
+Robust standard errors in parentheses								

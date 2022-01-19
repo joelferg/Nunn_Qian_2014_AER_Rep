@@ -1,0 +1,10 @@
+	(1)	(2)	(3)	(4)
+VARIABLES	intra_state_onset	intra_state_onset	intra_state_offset	intra_state_offset
+				
+wheat_aid	0.00102	0.00061		
+	(0.00080)	(0.00044)		
+				
+Observations	3,377	4,089	709	709
+R-squared	0.09543	0.07179		
+KP F-Stat	4.112	12.10		
+Robust standard errors in parentheses				

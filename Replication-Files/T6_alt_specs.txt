@@ -1,0 +1,14 @@
+	(1)	(2)	(3)	(4)	(5)	(6)	(7)	(8)	(9)	(10)
+VARIABLES	baseline	using lagged FAdum	using 2-year lagged FAdum	using 4-year lagged FAdum	normalize by pop	logs	No Soviet	Dropping early yrs	Add lag	Add lead
+										
+wheat_aid	0.00254	0.00284	0.00274	0.00284	0.0351	0.165	0.00266	0.00272	0.00439	0.00368
+	(0.00088)	(0.00164)	(0.00149)	(0.00159)	(0.0145)	(0.0541)	(0.00091)	(0.00108)	(0.00262)	(0.00289)
+l_wheat_aid									-0.00289	
+									(0.00335)	
+f_wheat_aid										-0.00112
+										(0.00316)
+										
+Observations	4,089	3,980	3,870	3,647	4,089	4,089	3,858	3,798	3,980	3,964
+R-squared	0.23568	0.17938	0.21369	0.21097	0.299	0.298	0.20661	0.21188	0.16282	0.13430
+KP F-Stat	12.10	7.113	8.878	1.804	17.61	21.92	11.41	13.80		
+Robust standard errors in parentheses										

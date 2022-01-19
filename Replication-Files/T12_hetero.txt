@@ -1,0 +1,21 @@
+	(1)	(2)	(3)	(4)	(5)	(6)	(7)
+VARIABLES	intra_state	intra_state	intra_state	intra_state	intra_state	intra_state	intra_state
+							
+wheat_aid	0.00254	0.00155	0.00270	0.00222	0.00516	0.00770	0.00500
+	(0.00088)	(0.00083)	(0.00102)	(0.00130)	(0.00229)	(0.00601)	(0.00401)
+wheat_aid_x_HighIncome		0.00305					
+		(0.00282)					
+wheat_aid_x_HighResource			-0.00030				
+			(0.00207)				
+wheat_aid_x_HighPolity				0.00043			
+				(0.00248)			
+wheat_aid_x_LowEPOL					-0.00469		-0.00708
+					(0.00256)		(0.00719)
+wheat_aid_x_LowEthnic						-0.00743	0.00261
+						(0.00727)	(0.01012)
+							
+Observations	4,089	4,089	4,089	3,942	3,635	4,048	3,594
+R-squared	0.23568	0.36810	0.25517	0.28810	0.36390	0.20892	0.34367
+Joint_coeff		0.00460	0.00240	0.00266	0.000468	0.000269	0.000524
+Joint_se		0.00256	0.00169	0.00174	0.000834	0.00145	0.000988
+Robust standard errors in parentheses							

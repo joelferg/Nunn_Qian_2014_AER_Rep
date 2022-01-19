@@ -1,0 +1,15 @@
+		(1)	(2)	(3)	(4)	(5)	(6)	(7)
+VARIABLES	LABELS	any_war	any_war	any_war	any_war	any_war	intra_state	inter_state
+								
+l_any_war		560.81653	560.28026	557.22944	551.60534	544.78019		
+		(36.81207)	(36.81687)	(37.27651)	(37.59953)	(37.37655)		
+instrument	Baseline interaction instrument: US wheat prod (t-1) x avg food aid prob (1971-2	0.00435	0.00593	0.00607	0.00688	0.00640	0.00560	-0.00110
+		(0.00144)	(0.00149)	(0.00155)	(0.00204)	(0.00207)	(0.00214)	(0.00085)
+l_intra_state							567.34539	
+							(35.89848)	
+l_inter_state								368.15126
+								(41.54505)
+								
+Observations		4,071	4,071	4,071	4,071	4,071	4,071	4,071
+R-squared		0.66516	0.66581	0.67004	0.67771	0.68480	0.67803	0.46876
+Robust standard errors in parentheses								

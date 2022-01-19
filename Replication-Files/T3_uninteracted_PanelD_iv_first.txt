@@ -1,0 +1,9 @@
+		(1)	(2)	(3)	(4)	(5)	(6)	(7)
+VARIABLES	LABELS	wheat_aid	wheat_aid	wheat_aid	wheat_aid	wheat_aid	wheat_aid	wheat_aid
+								
+instrument2	Alternative unteracted instrument: US wheat production (t-1)	0.000443	0.000670	0.000697	0.000699	0.000696	0.000696	0.000696
+		(0.000327)	(0.000359)	(0.000374)	(0.000377)	(0.000380)	(0.000380)	(0.000380)
+								
+Observations		4,089	4,089	4,089	4,089	4,089	4,089	4,089
+R-squared		0.473125	0.474790	0.477023	0.478508	0.480023	0.480023	0.480023
+Robust standard errors in parentheses								

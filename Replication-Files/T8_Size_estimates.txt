@@ -1,0 +1,10 @@
+		(1)	(2)	(3)	(4)	(5)	(6)
+VARIABLES	LABELS	Small any war	Small intra state	Small inter state	Big any war	Big intra state	Big inter state
+							
+wheat_aid	U.S. wheat aid (tonnes) - from FAO	0.00170	0.00164	-0.00006	0.00129	0.00090	-0.00038
+		(0.00090)	(0.00087)	(0.00015)	(0.00091)	(0.00085)	(0.00032)
+							
+Observations		4,089	4,089	4,089	4,089	4,089	4,089
+R-squared		0.21456	0.21004	0.32107	0.25217	0.26812	0.29407
+KP F-Stat		12.10	12.10	12.10	12.10	12.10	12.10
+Robust standard errors in parentheses							
